@@ -118,4 +118,17 @@ def lakes_by_surface(route):
                 lakes_list.append(line[name])
     return lakes_list
 
-
+def street_situation (route):
+    '''This function returns a list of tuples with the five jurisdictions with the largest homeless pupulation'''
+    jurisdiction = 0
+    percent = 13
+    with open (route, encoding = 'utf-8') as file:
+        reader = csv.reader(file)
+        next(reader)
+        next(reader)
+        jurisdiction_dict = {}
+        for line in reader:
+            jurisdiction_dict[line[jurisdiction]] = line[percent]
+        list_ordered = sorted (jurisdiction_dict.items(), key = lambda x: x[1], reverse = True)
+        max_5 = list_ordered[:5]
+    return max_5
