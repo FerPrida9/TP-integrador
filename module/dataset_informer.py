@@ -132,3 +132,21 @@ def street_situation (route):
         list_ordered = sorted (jurisdiction_dict.items(), key = lambda x: x[1], reverse = True)
         max_5 = list_ordered[:5]
     return max_5
+
+def population_gap (route):
+    '''This function returns a tuple with the name and the population gap of the jurisdiction
+       in wich the gap is largest'''
+    jurisdiction = 0
+    male_population = 5
+    female_population = 9
+    max_difference = -1
+    with open (route, encoding = 'utf-8') as file:
+        reader = csv.reader(file)
+        next (reader)
+        next (reader)
+        for line in reader:
+            difference = abs(int(line[male_population]) - int(line[female_population]))
+            if difference > max_difference:
+                max_difference = difference
+                tuple = (line[jurisdiction], difference)
+    return tuple
